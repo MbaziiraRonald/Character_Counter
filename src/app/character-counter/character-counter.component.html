@@ -1,0 +1,85 @@
+<div class="container">
+  <div id="heading">
+    <h1>Character Counter</h1>
+  </div>
+  <div class="text-fields">
+    <div class="text-area">
+      <textarea
+        [(ngModel)]="inputText"
+        placeholder="Enter your text here..."
+        aria-label="Text input area"
+      >
+      </textarea>
+    </div>
+    <input
+      id="display-vowels"
+      placeholder="Vowels"
+      [value]="vowelCount"
+      readonly
+      aria-label="Vowel count"
+    />
+    <input
+      id="display-consonants"
+      placeholder="Consonants"
+      [value]="consonantCount"
+      readonly
+      aria-label="Consonant count"
+    />
+    <input
+      id="display-letters"
+      placeholder="Letters"
+      [value]="letterCount"
+      readonly
+      aria-label="Letter count"
+    />
+    <input
+      id="display-numbers"
+      placeholder="Numbers"
+      [value]="numberCount"
+      readonly
+      aria-label="Number count"
+    />
+
+    <input
+      class="word-input"
+      type="text"
+      [(ngModel)]="wordsToCountInput"
+      placeholder="Words to count (e.g., cat, dog)"
+      aria-label="Words to count, comma separated"
+    />
+  </div>
+
+  <div *ngIf="specificWordCounts" class="word-counts-results">
+    <h3>Specific Word Counts:</h3>
+    <ul>
+      <li *ngFor="let item of specificWordCounts | keyvalue">
+        '{{ item.key }}': {{ item.value }}
+      </li>
+    </ul>
+    <p *ngIf="(specificWordCounts | keyvalue)?.length === 0">
+      Enter words in the field above to count them.
+    </p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+  <div class="buttons">
+    <button
+      id="my-button"
+      type="button"
+      class="btn btn-success count-button"
+      (click)="calculateAll()"
+    >
+      Count
+    </button>
+    <button
+      id="clear-fields"
+      type="button"
+      class="btn btn-success clear-button"
+      (click)="clearFields()"
+    >
+      Clear
+    </button>
+  </div>
+</div>
